@@ -38,10 +38,16 @@ bool LinkedList<T>::search(T value) const
 	Node<T>* temp = m_front;
 	bool isFound = false;
 
-	/** TODO 
-		Fix this method
-	*/
+        temp = m_front; // set temp equlals to old node
+        while (temp != nullptr)
+                {
+            if (temp->getValue() == value)// if temp's value is equal to the value parametar then the value is in linked list
+                        {
+                                return true;
+                        }
+                        temp = temp->getNext();
 
+                }
 	return(isFound);
 }
 
@@ -96,15 +102,36 @@ void LinkedList<T>::addFront(T value)
 template <typename T>
 bool LinkedList<T>::removeBack()
 {
-	Node<T>* lastNode = nullptr;
-	Node<T>* secondintoLast = nullptr;
-	bool isRemoved = false;
+    if (isEmpty())// if it is empty
+        {
+                return false;
 
-	/** TODO 
-		Fix this method
-	*/
+        }
+    else if (m_size == 1) // if size is one
+        {
+        removeFront();// remove only one
+        m_size--; // lower size
+                return true;
+        }
+    else// if 2 or more are in list
+        {
+        Node<T>* temp1 = m_front;// create temp node
+        Node<T>* temp2 = m_front;// create another temp node
+        while (temp1->getNext() != nullptr)// loop through temp1 node
+                {
+            temp1 = temp1->getNext(); // change values of temp1
+                }
+        while (temp2->getNext() != temp1)//loop through temp2 node until it doesnt equal temp1
+                {
+            temp2 = temp2->getNext();//change values of temp2
+                }
 
-	return(isRemoved);
+        delete temp1;// delete temp one node
+                temp2->setNext(nullptr);
+        m_size--;//lower the size
+                return true;
+        }
+
 }	
 
 template <typename T>
